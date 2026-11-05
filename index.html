@@ -152,6 +152,7 @@ button{background:none;border:0;cursor:pointer}
 .on-navy .form-msg{background:transparent;color:var(--ivory);border-color:var(--line-navy)}
 .field input[aria-invalid="true"]{border-color:#9B3B3B}
 .btn-submit{position:relative;width:100%}
+.lead-form iframe{display:block;width:100%;border:0;background:transparent}
 .btn__spinner{position:absolute;left:50%;top:50%;width:16px;height:16px;margin:-8px 0 0 -8px;border:1.5px solid currentColor;border-right-color:transparent;border-radius:50%;opacity:0;visibility:hidden}
 .btn__label{display:inline-flex;align-items:center;gap:10px}
 
@@ -770,23 +771,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="bg" data-parallax-bg></div><div class="duo"></div><div class="scrim"></div>
   </div>
   </div>
-  <form class="hero-form lead-form" id="claim" data-bhero-in="center" novalidate aria-labelledby="claim-title">
+  <div class="hero-form lead-form" id="claim" data-bhero-in="center" role="region" aria-labelledby="claim-title">
     <div class="form-head">
       <h2 class="form-title" id="claim-title">Claim your $99 scan</h2>
       <p class="form-note">Our team will call to confirm a time that suits you.</p>
     </div>
-    <div class="frow">
-      <div class="field"><label for="h-first">First name</label><input id="h-first" name="first_name" autocomplete="given-name" placeholder="First name" required></div>
-      <div class="field"><label for="h-last">Last name</label><input id="h-last" name="last_name" autocomplete="family-name" placeholder="Last name" required></div>
-    </div>
-    <div class="frow">
-      <div class="field"><label for="h-phone">Phone</label><input id="h-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="(404) 000-0000" required></div>
-      <div class="field"><label for="h-email">Email</label><input id="h-email" name="email" type="email" autocomplete="email" placeholder="you@email.com" required></div>
-    </div>
-    <button class="btn btn-primary btn-submit" type="submit"><span class="btn__label">Book my $99 scan<span class="arrow-wrap"><span class="ic arrow"><i data-lucide="arrow-up-right"></i></span></span></span><span class="btn__spinner" aria-hidden="true"></span></button>
-    <p class="form-msg" role="status" aria-live="polite"></p>
+    <iframe src="https://api.aevadigital.com/api/v1/forms/605/form-view/#aeva-submit-form-id-605" title="Claim your $99 DEXA scan" width="100%"
+      onload="onPageLoad('production')" id="myFormEmbed" frameborder="0">
+    </iframe>
+    <script type="text/javascript" src="https://aeva-static-bucket.s3.amazonaws.com/static/js/embedAevaScript.js"></script>
     <p class="fine">Open Monday to Friday, 8:00 AM to 4:30 PM. Financing through Cherry and CareCredit.</p>
-  </form>
+  </div>
 </section>
 
 <!-- ========== 3. Trust bar ========== -->
@@ -1049,22 +1044,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="item"><span class="ic"><i data-lucide="mail"></i></span><div class="t"><b>Email</b><a href="mailto:info@bodiatrics.com">info@bodiatrics.com</a></div></div>
       </div>
     </div>
-    <form class="cform on-navy lead-form" id="book" data-animate="fade-up" novalidate aria-labelledby="book-title">
+    <div class="cform on-navy lead-form" id="book" data-animate="fade-up" role="region" aria-labelledby="book-title">
       <h3 id="book-title">Book your $99 DEXA scan</h3>
       <p class="intro">Send your details and our Suwanee team will call to confirm a time.</p>
-      <div class="fields">
-        <div class="frow">
-          <div class="field"><label for="c-first">First name</label><input id="c-first" name="first_name" autocomplete="given-name" placeholder="Your first name" required></div>
-          <div class="field"><label for="c-last">Last name</label><input id="c-last" name="last_name" autocomplete="family-name" placeholder="Your last name" required></div>
-        </div>
-        <div class="field"><label for="c-phone">Phone</label><input id="c-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="(404) 000-0000" required></div>
-        <div class="field"><label for="c-email">Email</label><input id="c-email" name="email" type="email" autocomplete="email" placeholder="you@email.com" required></div>
-        <div class="field"><label for="c-msg">Message <span class="opt">(optional)</span></label><textarea id="c-msg" name="message" rows="3" placeholder="Anything we should know before your scan?"></textarea></div>
-      </div>
-      <button class="btn btn-ivory btn-submit" type="submit"><span class="btn__label">Book my $99 scan</span><span class="btn__spinner" aria-hidden="true"></span></button>
-      <p class="form-msg" role="status" aria-live="polite"></p>
+      <iframe src="https://api.aevadigital.com/api/v1/forms/605/form-view/" title="Book your $99 DEXA scan" width="100%"
+        onload="onPageLoad('production')" id="myFormEmbed" frameborder="0">
+      </iframe>
       <p class="fine">Not for use during pregnancy. Financing available through Cherry and CareCredit.</p>
-    </form>
+    </div>
   </div>
 </section>
 
@@ -1236,7 +1223,7 @@ if (window.gsap) {
 const headerH = () => document.querySelector(".header").offsetHeight;
 function scrollToEl(el, focusFirst) {
   if (!el) return;
-  const y = el.getBoundingClientRect().top + window.scrollY - headerH() - (el.matches("form") ? 24 : 0);
+  const y = el.getBoundingClientRect().top + window.scrollY - headerH() - (el.matches(".lead-form") ? 24 : 0);
   const done = () => { if (focusFirst) { const f = el.querySelector("input"); f && f.focus({ preventScroll: true }); } };
   if (lenis) lenis.scrollTo(Math.max(0, y), { duration: 1.2, onComplete: done });
   else { window.scrollTo({ top: Math.max(0, y), behavior: REDUCED ? "auto" : "smooth" }); setTimeout(done, REDUCED ? 0 : 700); }
@@ -1292,51 +1279,6 @@ document.addEventListener("keydown", e => { if (e.key === "Escape") { closeMenu(
   }
 })();
 
-/* ---------- Lead forms: validation, loading and success states ----------
-   Connect a real endpoint by setting data-endpoint on the <form> elements.
-   Without one, the form shows the success state locally. */
-document.querySelectorAll(".lead-form").forEach(form => {
-  const btn = form.querySelector(".btn-submit"), msg = form.querySelector(".form-msg");
-  const label = btn.querySelector(".btn__label"), spin = btn.querySelector(".btn__spinner");
-  form.addEventListener("submit", async e => {
-    e.preventDefault();
-    let firstBad = null;
-    form.querySelectorAll("input[required]").forEach(i => {
-      const bad = !i.value.trim() || (i.type === "email" && !/^\S+@\S+\.\S+$/.test(i.value)) || (i.type === "tel" && i.value.replace(/\D/g, "").length < 10);
-      i.setAttribute("aria-invalid", bad ? "true" : "false");
-      if (bad && !firstBad) firstBad = i;
-    });
-    if (firstBad) {
-      msg.textContent = "Please add your name, a phone number with area code and a valid email.";
-      msg.classList.add("show"); firstBad.focus(); return;
-    }
-    msg.classList.remove("show");
-    btn.disabled = true; btn.setAttribute("aria-busy", "true");
-    let loop;
-    if (window.gsap) {
-      gsap.to(label, { autoAlpha: 0, duration: 0.15 });
-      gsap.fromTo(spin, { autoAlpha: 0, scale: 0.6 }, { autoAlpha: 1, scale: 1, duration: 0.2, ease: "power2.out" });
-      loop = gsap.to(spin, { rotation: 360, duration: 0.7, ease: "none", repeat: -1 });
-    }
-    try {
-      if (form.dataset.endpoint) await fetch(form.dataset.endpoint, { method: "POST", body: new FormData(form) });
-      else await new Promise(r => setTimeout(r, 900));
-    } catch (err) {}
-    loop && loop.kill();
-    if (window.gsap) {
-      gsap.to(spin, { autoAlpha: 0, duration: 0.1 });
-      gsap.to(label, { autoAlpha: 1, duration: 0.2, delay: 0.1 });
-    }
-    btn.disabled = false; btn.removeAttribute("aria-busy");
-    const first = form.querySelector('[name="first_name"]').value.trim();
-    msg.textContent = `Thank you, ${first}. Our Suwanee team will call you shortly to confirm your $99 DEXA scan.`;
-    msg.classList.add("show");
-    window.gsap && gsap.fromTo(msg, { autoAlpha: 0, y: 8 }, { autoAlpha: 1, y: 0, duration: 0.3, ease: "power3.out" });
-    form.reset();
-    window.ScrollTrigger && ScrollTrigger.refresh();
-  });
-  form.querySelectorAll("input").forEach(i => i.addEventListener("input", () => i.removeAttribute("aria-invalid")));
-});
 
 /* ---------- FAQ accordion (exclusive, smooth height) ---------- */
 document.querySelectorAll(".qa").forEach(item => {
@@ -1595,12 +1537,6 @@ if (window.gsap) {
     });
   })();
 
-  /* 11. Form focus, brand matched */
-  document.querySelectorAll(".lead-form input, .lead-form textarea").forEach(f => {
-    const rest = getComputedStyle(f).borderColor;
-    f.addEventListener("focus", () => gsap.to(f, { borderColor: "rgba(184,154,98,0.5)", boxShadow: "0 0 0 2px rgba(184,154,98,0.35)", duration: 0.18, ease: "power2.out" }));
-    f.addEventListener("blur", () => gsap.to(f, { borderColor: rest, boxShadow: "0 0 0 0 rgba(184,154,98,0)", duration: 0.18, ease: "power2.out", clearProps: "borderColor" }));
-  });
 
   /* Counter helper (stats counter from the guide) */
   function countUp(el, delay) {
