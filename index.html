@@ -152,7 +152,17 @@ button{background:none;border:0;cursor:pointer}
 .on-navy .form-msg{background:transparent;color:var(--ivory);border-color:var(--line-navy)}
 .field input[aria-invalid="true"]{border-color:#9B3B3B}
 .btn-submit{position:relative;width:100%}
-.lead-form iframe{display:block;width:100%;border:0;background:transparent}
+.field textarea[aria-invalid="true"]{border-color:#9B3B3B}
+.consent{display:flex;align-items:flex-start;gap:12px}
+.consent input{flex:none;width:18px;height:18px;margin:1px 0 0;background:#fff;border:1px solid #2D313640;border-radius:0;-webkit-appearance:none;appearance:none;cursor:pointer;display:grid;place-content:center}
+.consent input::before{content:"";width:10px;height:10px;background:var(--navy);clip-path:polygon(14% 44%,0 65%,50% 100%,100% 16%,80% 0,43% 62%);transform:scale(0)}
+.consent input:checked::before{transform:scale(1)}
+.consent input:focus-visible{outline:2px solid var(--navy);outline-offset:2px}
+.consent input[aria-invalid="true"]{border-color:#9B3B3B}
+.consent label{font-size:13px;line-height:1.5;color:#5A6068;cursor:pointer}
+.on-navy .consent label{color:var(--fog)}
+.on-navy .consent input:focus-visible{outline-color:var(--gold-light)}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
 .btn__spinner{position:absolute;left:50%;top:50%;width:16px;height:16px;margin:-8px 0 0 -8px;border:1.5px solid currentColor;border-right-color:transparent;border-radius:50%;opacity:0;visibility:hidden}
 .btn__label{display:inline-flex;align-items:center;gap:10px}
 
@@ -771,17 +781,25 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="bg" data-parallax-bg></div><div class="duo"></div><div class="scrim"></div>
   </div>
   </div>
-  <div class="hero-form lead-form" id="claim" data-bhero-in="center" role="region" aria-labelledby="claim-title">
+  <form class="hero-form lead-form" id="claim" data-bhero-in="center" data-form-id="605" novalidate aria-labelledby="claim-title">
     <div class="form-head">
       <h2 class="form-title" id="claim-title">Claim your $99 scan</h2>
       <p class="form-note">Our team will call to confirm a time that suits you.</p>
     </div>
-    <iframe src="https://api.aevadigital.com/api/v1/forms/605/form-view/#aeva-submit-form-id-605" title="Claim your $99 DEXA scan" width="100%"
-      onload="onPageLoad('production')" id="myFormEmbed" frameborder="0">
-    </iframe>
-    <script type="text/javascript" src="https://aeva-static-bucket.s3.amazonaws.com/static/js/embedAevaScript.js"></script>
+    <div class="frow">
+      <div class="field"><label for="h-first">First name</label><input id="h-first" name="first_name" autocomplete="given-name" maxlength="30" placeholder="First Name" required></div>
+      <div class="field"><label for="h-last">Last name</label><input id="h-last" name="last_name" autocomplete="family-name" maxlength="150" placeholder="Last Name" required></div>
+    </div>
+    <div class="frow">
+      <div class="field"><label for="h-phone">Phone</label><input id="h-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="15" placeholder="Phone" required></div>
+      <div class="field"><label for="h-email">Email</label><input id="h-email" name="email" type="email" autocomplete="email" maxlength="254" placeholder="Email" required></div>
+    </div>
+    <div class="consent"><input id="h-consent" name="checkbox" type="checkbox" required><label for="h-consent">By submitting this form, you agree to receive text messages from Bodiatrics. Rates may be applied. You may unsubscribe any time by replying STOP.</label></div>
+    <div class="hp" aria-hidden="true"><input name="email_confirmation" tabindex="-1" autocomplete="off"><input name="alternate_name" tabindex="-1" autocomplete="off"></div>
+    <button class="btn btn-primary btn-submit" type="submit"><span class="btn__label">Book my $99 scan<span class="arrow-wrap"><span class="ic arrow"><i data-lucide="arrow-up-right"></i></span></span></span><span class="btn__spinner" aria-hidden="true"></span></button>
+    <p class="form-msg" role="status" aria-live="polite"></p>
     <p class="fine">Open Monday to Friday, 8:00 AM to 4:30 PM. Financing through Cherry and CareCredit.</p>
-  </div>
+  </form>
 </section>
 
 <!-- ========== 3. Trust bar ========== -->
@@ -1044,14 +1062,24 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="item"><span class="ic"><i data-lucide="mail"></i></span><div class="t"><b>Email</b><a href="mailto:info@bodiatrics.com">info@bodiatrics.com</a></div></div>
       </div>
     </div>
-    <div class="cform on-navy lead-form" id="book" data-animate="fade-up" role="region" aria-labelledby="book-title">
+    <form class="cform on-navy lead-form" id="book" data-animate="fade-up" data-form-id="605" novalidate aria-labelledby="book-title">
       <h3 id="book-title">Book your $99 DEXA scan</h3>
       <p class="intro">Send your details and our Suwanee team will call to confirm a time.</p>
-      <iframe src="https://api.aevadigital.com/api/v1/forms/605/form-view/" title="Book your $99 DEXA scan" width="100%"
-        onload="onPageLoad('production')" id="myFormEmbed" frameborder="0">
-      </iframe>
+      <div class="fields">
+        <div class="frow">
+          <div class="field"><label for="c-first">First name</label><input id="c-first" name="first_name" autocomplete="given-name" maxlength="30" placeholder="First Name" required></div>
+          <div class="field"><label for="c-last">Last name</label><input id="c-last" name="last_name" autocomplete="family-name" maxlength="150" placeholder="Last Name" required></div>
+        </div>
+        <div class="field"><label for="c-phone">Phone</label><input id="c-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="15" placeholder="Phone" required></div>
+        <div class="field"><label for="c-email">Email</label><input id="c-email" name="email" type="email" autocomplete="email" maxlength="254" placeholder="Email" required></div>
+        <div class="field"><label for="c-msg">Message <span class="opt">(optional)</span></label><textarea id="c-msg" name="message" rows="3" maxlength="1000" placeholder="Anything we should know before your scan?"></textarea></div>
+      </div>
+      <div class="consent"><input id="c-consent" name="checkbox" type="checkbox" required><label for="c-consent">By submitting this form, you agree to receive text messages from Bodiatrics. Rates may be applied. You may unsubscribe any time by replying STOP.</label></div>
+      <div class="hp" aria-hidden="true"><input name="email_confirmation" tabindex="-1" autocomplete="off"><input name="alternate_name" tabindex="-1" autocomplete="off"></div>
+      <button class="btn btn-ivory btn-submit" type="submit"><span class="btn__label">Book my $99 scan</span><span class="btn__spinner" aria-hidden="true"></span></button>
+      <p class="form-msg" role="status" aria-live="polite"></p>
       <p class="fine">Not for use during pregnancy. Financing available through Cherry and CareCredit.</p>
-    </div>
+    </form>
   </div>
 </section>
 
@@ -1278,6 +1306,91 @@ document.addEventListener("keydown", e => { if (e.key === "Escape") { closeMenu(
     hoverOut(play, () => gsap.to(play, { scale: 1, duration: 0.3, ease: "power2.out" }));
   }
 })();
+
+/* ---------- Lead forms: validation, AEVA submit, loading and success states ---------- */
+const AEVA_ENDPOINT = "https://api.aevadigital.com/api/v1/contacts/add_contact_from_form/";
+const AEVA_ORG = "90ac72a5-c33a-431d-8332-e4f4796bd660";
+// Same ad attribution as the AEVA embed: click ids first, then utm_source tokens
+function adAttribution() {
+  const p = new URLSearchParams(window.location.search);
+  const clickIds = { gclid: "google", wbraid: "google", gbraid: "google", fbclid: "meta", ttclid: "tiktok" };
+  for (const k in clickIds) if (p.get(k)) return { source: clickIds[k], param: p.get(k) };
+  const tokens = (p.get("utm_source") || "").toLowerCase().split(/[^a-z0-9]+/);
+  const aliases = { meta: ["fb", "facebook", "meta", "instagram"], google: ["google", "adwords"], tiktok: ["tiktok"] };
+  for (const s in aliases) if (aliases[s].some(a => tokens.includes(a))) return { source: s, param: p.get("utm_campaign") || p.get("utm_source") || "" };
+  return { source: "other", param: "" };
+}
+document.querySelectorAll(".lead-form").forEach(form => {
+  const btn = form.querySelector(".btn-submit"), msg = form.querySelector(".form-msg");
+  const label = btn.querySelector(".btn__label"), spin = btn.querySelector(".btn__spinner");
+  let busy = false;
+  const checks = {
+    first_name: v => v.length > 0 && v.length <= 30,
+    last_name: v => v.length > 0 && v.length <= 150,
+    phone: v => /^\+?\(?\d{3}\)?[-\s.]?\d{3}[-\s.]?\d{4,15}$/.test(v),
+    email: v => /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/.test(v)
+  };
+  const showMsg = text => {
+    msg.textContent = text; msg.classList.add("show");
+    window.gsap && gsap.fromTo(msg, { autoAlpha: 0, y: 8 }, { autoAlpha: 1, y: 0, duration: 0.3, ease: "power3.out" });
+    window.ScrollTrigger && ScrollTrigger.refresh();
+  };
+  const setLoading = on => {
+    btn.disabled = on; on ? btn.setAttribute("aria-busy", "true") : btn.removeAttribute("aria-busy");
+    if (!window.gsap) return;
+    if (on) {
+      gsap.to(label, { autoAlpha: 0, duration: 0.15 });
+      gsap.fromTo(spin, { autoAlpha: 0, scale: 0.6 }, { autoAlpha: 1, scale: 1, duration: 0.2, ease: "power2.out" });
+      form._spin = gsap.to(spin, { rotation: 360, duration: 0.7, ease: "none", repeat: -1 });
+    } else {
+      form._spin && form._spin.kill();
+      gsap.to(spin, { autoAlpha: 0, duration: 0.1 });
+      gsap.to(label, { autoAlpha: 1, duration: 0.2, delay: 0.1 });
+    }
+  };
+  form.addEventListener("submit", async e => {
+    e.preventDefault();
+    if (busy) return;
+    let firstBad = null;
+    Object.keys(checks).forEach(name => {
+      const i = form.elements[name], bad = !checks[name](i.value.trim());
+      i.setAttribute("aria-invalid", bad ? "true" : "false");
+      if (bad && !firstBad) firstBad = i;
+    });
+    const consent = form.elements.checkbox;
+    consent.setAttribute("aria-invalid", consent.checked ? "false" : "true");
+    if (!consent.checked && !firstBad) firstBad = consent;
+    if (firstBad) {
+      showMsg(firstBad === consent ? "Please tick the box to agree to text messages from Bodiatrics." : "Please add your name, a phone number with area code and a valid email.");
+      firstBad.focus(); return;
+    }
+    msg.classList.remove("show");
+    busy = true; setLoading(true);
+    const data = new FormData(form);
+    ["first_name", "last_name", "phone", "email", "message"].forEach(k => data.has(k) && data.set(k, data.get(k).trim()));
+    const ad = adAttribution();
+    data.append("organization", AEVA_ORG);
+    data.append("form", form.dataset.formId);
+    data.append("form_location", window.location.href);
+    data.append("ad_source", ad.source);
+    data.append("tracking_param", ad.param);
+    let ok = false;
+    try {
+      const res = await fetch(AEVA_ENDPOINT, { method: "POST", body: data, cache: "no-store" });
+      ok = res.ok;
+    } catch (err) {}
+    busy = false; setLoading(false);
+    if (ok) {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ event: "form-success", aevaFormId: form.dataset.formId });
+      showMsg(`Thank you, ${data.get("first_name")}. Our Suwanee team will call you shortly to confirm your $99 DEXA scan.`);
+      form.reset();
+    } else {
+      showMsg("Something went wrong sending your details. Please try again or call us at (470) 740-9156.");
+    }
+  });
+  form.querySelectorAll("input, textarea").forEach(i => i.addEventListener(i.type === "checkbox" ? "change" : "input", () => i.removeAttribute("aria-invalid")));
+});
 
 
 /* ---------- FAQ accordion (exclusive, smooth height) ---------- */
@@ -1537,6 +1650,12 @@ if (window.gsap) {
     });
   })();
 
+  /* 11. Form focus, brand matched */
+  document.querySelectorAll(".lead-form input:not([type=checkbox]), .lead-form textarea").forEach(f => {
+    const rest = getComputedStyle(f).borderColor;
+    f.addEventListener("focus", () => gsap.to(f, { borderColor: "rgba(184,154,98,0.5)", boxShadow: "0 0 0 2px rgba(184,154,98,0.35)", duration: 0.18, ease: "power2.out" }));
+    f.addEventListener("blur", () => gsap.to(f, { borderColor: rest, boxShadow: "0 0 0 0 rgba(184,154,98,0)", duration: 0.18, ease: "power2.out", clearProps: "borderColor" }));
+  });
 
   /* Counter helper (stats counter from the guide) */
   function countUp(el, delay) {
